@@ -11,4 +11,4 @@ require __DIR__ . '/library/think/Loader.php';
 
 Loader::register();
 
-Error::test();
+Error::register();
