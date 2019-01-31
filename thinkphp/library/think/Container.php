@@ -12,9 +12,6 @@ class Container{
 
     private $bind = [
         'app'                   => App::class,
-        'config'                => Config::class,
-        'hook'                  => Hook::class,
-        'log'                   => Log::class,
         'middleware'            => Middleware::class,
         'request'               => Request::class,
         'response'              => Response::class,
@@ -105,5 +102,11 @@ class Container{
         }
 
         return $object;
+    }
+
+    public function __get($name)
+    {
+        // TODO: Implement __get() method.
+        return $this->make($name);
     }
 }

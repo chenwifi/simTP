@@ -12,3 +12,13 @@ require __DIR__ . '/library/think/Loader.php';
 Loader::register();
 
 Error::register();
+
+Loader::addClassAlias([
+    'App'      => facade\App::class,
+    'Db'       => Db::class,
+    'Facade'   => Facade::class,
+    'Request'  => facade\Request::class,
+    'Response' => facade\Response::class,
+    'Route'    => facade\Route::class,
+    'Url'      => facade\Url::class,
+]);

@@ -11,4 +11,4 @@ namespace think;
 require __DIR__ . '/../thinkphp/base.php';
 
 //执行应用
-Container::get('app',['name'=>'smallfai','wifi'=>'wifi']);
+Container::get('app',['name'=>'smallfai','wifi'=>'wifi'])->run();

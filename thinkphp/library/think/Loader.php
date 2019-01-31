@@ -27,6 +27,8 @@ class Loader{
     ];
     private static $fallbackDirsPsr4 = [];
 
+    private static $classAlias = [];
+
     protected static $classMap = [];
 
     public static function register(){
@@ -41,9 +43,21 @@ class Loader{
     }
 
     public static function autoload($class){
+        if(isset(self::$classAlias[$class])){
+            class_alias(self::$classAlias[$class],$class);
+        }
+
         if($file = self::findFile($class)){
             __include_file($file);
             return true;
+        }
+    }
+
+    public static function addClassAlias($alias,$class = null){
+        if(is_array($alias)){
+            self::$classAlias = array_merge(self::$classAlias,$alias);
+        }else{
+            self::$classAlias[$class] = $alias;
         }
     }
 
