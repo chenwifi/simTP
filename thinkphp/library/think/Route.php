@@ -40,6 +40,12 @@ class Route{
 
     public function check($url){
         $domain = $this->domains[$this->host];
-        $domain->check($url);
+        $result = $domain->check($url);
+
+        if(false !== $result){
+            return $result;
+        }else{
+            throw new \Exception('route is not match');
+        }
     }
 }

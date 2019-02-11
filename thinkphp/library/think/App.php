@@ -60,4 +60,8 @@ class App extends Container{
         //路由检测，返回一个Dispatch对象
         $dispatch = $this->route->check($path);
     }
+
+    public function getAppPath(){
+        return $this->appPath;
+    }
 }

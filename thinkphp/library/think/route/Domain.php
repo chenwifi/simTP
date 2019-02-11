@@ -44,7 +44,13 @@ class Domain extends RuleGroup{
         }
 
         foreach($rules as $key=>$item){
+            $result = $item->checkRule($url);
 
+            if(false !== $result){
+                return $result;
+            }else{
+                return false;
+            }
         }
     }
 
