@@ -48,4 +48,8 @@ class Route{
             throw new \Exception('route is not match');
         }
     }
+
+    public function getName($name = null,$domain = null, $method = '*'){
+        $this->app->rule_name->get($name,$domain,$method);
+    }
 }

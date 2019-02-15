@@ -16,6 +16,14 @@ class RuleName{
     }
 
     public function set($name,$value){
-        $this->item[$name] = $value;
+        $this->item[$name][] = $value;
+    }
+
+    public function get($name = null,$domain = null,$method = '*'){
+        if(isset($this->item[$name])){
+            $result = $this->item[$name];
+        }
+
+        return $result;
     }
 }

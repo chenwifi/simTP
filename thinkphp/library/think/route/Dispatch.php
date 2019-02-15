@@ -28,4 +28,8 @@ class Dispatch{
             $this->app->middleware->import($option['middleware']);
         }
     }
+
+    public function run(){
+        $this->exec();
+    }
 }

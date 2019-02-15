@@ -47,10 +47,14 @@ class App extends Container{
 
         //路由检测
         $dispatch = $this->routeCheck()->init();
+
+        $this->middleware->add(function () use ($dispatch){
+            $dispatch->run();
+        });
     }
 
     public function routeInit(){
-        $file = scandir($this->routePath);
+        //$file = scandir($this->routePath);
         include $this->routePath . 'route.php';
     }
 
@@ -59,9 +63,21 @@ class App extends Container{
 
         //路由检测，返回一个Dispatch对象
         $dispatch = $this->route->check($path);
+        return $dispatch;
     }
 
     public function getAppPath(){
         return $this->appPath;
+    }
+
+    //实例化控制器,返回实例(简易化)
+    public function controller($module,$name,$layer = 'controller'){
+        $class = 'app' . '\\' . $module . '\\' . $layer . '\\' . ucfirst($name);
+        return $this->__get($class);
+    }
+
+    public function invokeReflectMethod($instance,$reflect,$vars = []){
+        $args = $this->bindParams($reflect,$vars);
+        return $reflect->invokeArgs($instance,$args);
     }
 }
