@@ -10,4 +10,6 @@ Route::get('think', function () {
     return 'hello world from simTp!';
 });
 
+Route::get('test','index/index/test');
+
 return [];

@@ -21,6 +21,7 @@ class Route{
     {
         $this->app = $app;
         $this->host = $_SERVER['HTTP_HOST'];
+        $this->setDefaultDomain();
     }
 
     protected function setDefaultDomain(){

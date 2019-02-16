@@ -17,6 +17,7 @@ class Rule{
     protected $rule;
     protected $router;
     protected $option;
+    protected $domain;
 
     public function getDomain(){
         return $this->parent->getDomain();

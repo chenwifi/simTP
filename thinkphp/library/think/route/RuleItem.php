@@ -12,9 +12,9 @@ use think\Route;
 
 class RuleItem extends Rule{
 
-    public function __construct(Route $route,RuleGroup $parent,$name,$rule,$route,$method)
+    public function __construct(Route $router,RuleGroup $parent,$name,$rule,$route,$method)
     {
-        $this->router = $route;
+        $this->router = $router;
         $this->parent = $parent;
         $this->name = $name;
         $this->route = $route;

@@ -97,10 +97,10 @@ class Container{
             $object = $this->invokeClass($abstract,$vars);
         }
 
-        if(!$object){
+        if(!$newIns){
             $this->instances[$abstract] = $object;
         }
-
+        print_r($this->name);
         return $object;
     }
 

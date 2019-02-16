@@ -44,7 +44,7 @@ class Loader{
 
     public static function autoload($class){
         if(isset(self::$classAlias[$class])){
-            class_alias(self::$classAlias[$class],$class);
+            return class_alias(self::$classAlias[$class],$class);
         }
 
         if($file = self::findFile($class)){
@@ -66,14 +66,14 @@ class Loader{
             return self::$classMap[$class];
         }
 
-        $name = $class . '.php';
+        $name = strtr($class,'\\',DIRECTORY_SEPARATOR) . '.php';
         $first = $name[0];
 
         if(isset(self::$prefixLengthsPsr4[$first])){
             foreach (self::$prefixLengthsPsr4[$first] as $prefix=>$length){
-                if(0===strpos($name,$prefix)){
+                if(0===strpos($class,$prefix)){
                     foreach(self::$prefixDirsPsr4[$prefix] as $path){
-                        if(is_file($file = $path . '/' . substr($name,$length))){
+                        if(is_file($file = $path . DIRECTORY_SEPARATOR . substr($name,$length))){
                             return $file;
                         }
                     }
