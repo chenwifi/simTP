@@ -7,7 +7,7 @@
  */
 
 Route::get('think', function () {
-    return 'hello world from simTp!';
+    echo 'hello world from simTp!';
 });
 
 Route::get('test','index/index/test');

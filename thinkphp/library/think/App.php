@@ -24,7 +24,8 @@ class App extends Container{
     public function initialize(){
         $this->rootPath = dirname($this->appPath) . '/';
         $this->routePath = $this->rootPath . 'route' . '/';
-
+        self::setIns($this);
+        $this->instance('app',$this);
         $this->init();
         //路由初始化
         $this->routeInit();
@@ -48,9 +49,11 @@ class App extends Container{
         //路由检测
         $dispatch = $this->routeCheck()->init();
 
-        $this->middleware->add(function () use ($dispatch){
+        $this->middleware->add(function ($next) use ($dispatch){
             $dispatch->run();
         });
+
+        $this->middleware->dispatch();
     }
 
     public function routeInit(){

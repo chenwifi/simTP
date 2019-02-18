@@ -49,9 +49,11 @@ class Domain extends RuleGroup{
             if(false !== $result){
                 return $result;
             }else{
-                return false;
+                continue;
             }
         }
+
+        return false;
     }
 
 }

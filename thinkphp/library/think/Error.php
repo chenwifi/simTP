@@ -38,7 +38,7 @@ class Error{
 
     public static function appShutdown(){
         //捕获最后一次错误
-        if(!$error = error_get_last()){
+        if(!is_null($error = error_get_last())){
             $exception = new errorException($error['type'],$error['message'],$error['file'],$error['line']);
             self::appException($exception);
         }

@@ -43,6 +43,7 @@ class Loader{
     }
 
     public static function autoload($class){
+        //print_r($class);echo '<br />';
         if(isset(self::$classAlias[$class])){
             return class_alias(self::$classAlias[$class],$class);
         }

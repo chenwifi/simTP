@@ -8,9 +8,9 @@
 namespace app\http\middleware;
 
 class Auth{
-    public function handle($request,\Closure $next,$name){
+    public function handle(\Closure $next,$name){
         echo $name;
         echo ' this is auth middleware ';
-        return $next($request);
+        return $next();
     }
 }

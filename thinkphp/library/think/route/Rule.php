@@ -8,6 +8,7 @@
 namespace think\route;
 
 use think\route\dispatch\Module as ModuleDispatch;
+use think\route\dispatch\Callback as CallbackDispatch;
 
 class Rule{
     protected $method;
@@ -56,14 +57,16 @@ class Rule{
         $controller = array_pop($path);
         $module = array_pop($path);
 
-        return new ModuleDispatch();
+        $dispatch = [$module,$controller,$action];
+
+        return new ModuleDispatch($this,$dispatch);
     }
 
     //检测路由
     public function dispatch($route){
         //这里只有闭包方法和路由到模块/控制器/操作
         if($route instanceof \Closure){
-
+            $result = new CallbackDispatch($this,$route);
         }else{
             $result = $this->dispatchModule($route);
         }

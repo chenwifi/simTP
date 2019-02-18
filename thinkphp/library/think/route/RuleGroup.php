@@ -9,7 +9,11 @@ namespace think\route;
 
 class RuleGroup extends Rule{
 
-    protected $rules;
+    protected $rules = [
+        '*' => [],
+        'get' => [],
+        'post' => [],
+    ];
 
     public function getDomain()
     {

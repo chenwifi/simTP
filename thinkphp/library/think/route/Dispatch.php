@@ -27,6 +27,8 @@ class Dispatch{
         if(!empty($option['middleware'])){
             $this->app->middleware->import($option['middleware']);
         }
+
+        return $this;
     }
 
     public function run(){

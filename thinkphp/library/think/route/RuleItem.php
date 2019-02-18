@@ -40,7 +40,7 @@ class RuleItem extends Rule{
         $option = $this->option;
         $match = strcasecmp($url,$this->rule)==0;
         if($match){
-            $this->dispatch($this->route);
+            return $this->dispatch($this->route);
         }else{
             return false;
         }

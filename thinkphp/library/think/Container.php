@@ -8,9 +8,9 @@
 namespace think;
 
 class Container{
-    private static $ins=null;
+    protected static $ins=null;
 
-    private $bind = [
+    protected $bind = [
         'app'                   => App::class,
         'middleware'            => Middleware::class,
         'request'               => Request::class,
@@ -21,16 +21,35 @@ class Container{
     ];
 
     //容器名
-    protected $name = [];
+    public $name = [];
     //容器实例
     protected $instances = [];
 
     public static function getIns(){
-        if(is_null(self::$ins)){
-            self::$ins = new static();
+        if(is_null(static::$ins)){
+            static::$ins = new static();
         }
 
-        return self::$ins;
+        return static::$ins;
+    }
+
+    //这是个大坑啊，须在app初始化的时候调用
+    public function setIns($ins){
+        static::$ins = $ins;
+    }
+
+    //绑定实例到容器
+    public function instance($abstract,$instance){
+        if($instance instanceof \Closure){
+            $this->bind[$abstract] = $instance;
+        }else{
+            if(isset($this->bind[$abstract])){
+                $abstract = $this->bind[$abstract];
+            }
+            $this->instances[$abstract] = $instance;
+        }
+
+        return $this;
     }
 
     public static function get($class,$vars=[],$newIns=false){
@@ -100,8 +119,14 @@ class Container{
         if(!$newIns){
             $this->instances[$abstract] = $object;
         }
-        print_r($this->name);
+        //print_r($this->name);
         return $object;
+    }
+
+    public function invoke($method,$param = null){
+        $reflect = new \ReflectionFunction($method);
+        $param = $this->bindParams($reflect,$param);
+        return $reflect->invokeArgs($param);
     }
 
     public function __get($name)
